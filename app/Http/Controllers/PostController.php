@@ -17,12 +17,12 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('created_at', 'desc')->paginate(6);
-        return view('post/index',compact('posts'));
+        return view('post/index', compact('posts'));
     }
 
-    public function show()
+    public function show(Post $post)
     {
-        return view('post/show');
+        return view('post/show', compact('post'));
     }
 
     public function create()
