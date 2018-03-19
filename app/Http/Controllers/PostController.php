@@ -32,6 +32,12 @@ class PostController extends Controller
 
     public function store()
     {
+        $this->validate(request(), [
+            'title' => 'required|string|max:100|min:5',
+            'content' => 'required|string|min:10'
+        ], [
+            'title.min' => '文章标题过短'
+        ]);
         $post = Post::create(request(['title', 'content']));
         return redirect('/posts');
     }
@@ -47,5 +53,11 @@ class PostController extends Controller
 
     public function update()
     {
+    }
+
+    public function image_upload()
+    {
+        $path = request()->file('wangEditorH5File')->storePublicly(md5(time()));
+        return asset('storage/' . $path);
     }
 }
