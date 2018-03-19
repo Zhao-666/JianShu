@@ -32,6 +32,8 @@ class PostController extends Controller
 
     public function store()
     {
+        $post = Post::create(request(['title', 'content']));
+        return redirect('/posts');
     }
 
     public function delete()
