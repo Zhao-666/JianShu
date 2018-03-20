@@ -38,12 +38,14 @@ class PostController extends Controller
         ], [
             'title.min' => '文章标题过短'
         ]);
-        $post = Post::create(request(['title', 'content']));
+        Post::create(request(['title', 'content']));
         return redirect('/posts');
     }
 
-    public function delete()
+    public function delete(Post $post)
     {
+        $post->delete();
+        return redirect('/posts');
     }
 
     public function edit()

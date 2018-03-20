@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 
+use App\User;
+
 class RegisterController extends Controller
 {
     public function index()
@@ -22,7 +24,9 @@ class RegisterController extends Controller
         $name = request('name');
         $email = request('email');
         $password = bcrypt(request('password'));
+        User::create(compact('name', 'email', 'password'));
 
         //渲染
+        return redirect('/login');
     }
 }
