@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 
 use App\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -35,26 +36,39 @@ class PostController extends Controller
         $this->validate(request(), [
             'title' => 'required|string|max:100|min:5',
             'content' => 'required|string|min:10'
-        ], [
-            'title.min' => '文章标题过短'
         ]);
-        Post::create(request(['title', 'content']));
+
+        $user_id = Auth::id();
+        $params = array_merge(request(['title', 'content']), compact('user_id'));
+        Post::create($params);
         return redirect('/posts');
     }
 
     public function delete(Post $post)
     {
+        $this->authorize('delete',$post);
         $post->delete();
         return redirect('/posts');
     }
 
-    public function edit()
+    public function edit(Post $post)
     {
-        return view('post/edit');
+        return view('post/edit',compact('post'));
     }
 
-    public function update()
+    public function update(Post $post)
     {
+        $this->validate(request(), [
+            'title' => 'required|string|max:100|min:5',
+            'content' => 'required|string|min:10'
+        ]);
+
+        $this->authorize('update',$post);
+
+        $post->title = request('title');
+        $post->content = request('content');
+        $post->save();
+        return redirect("/posts/$post->id");
     }
 
     public function image_upload()
