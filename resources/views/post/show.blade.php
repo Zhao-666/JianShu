@@ -31,6 +31,14 @@
 
             <!-- List group -->
             <ul class="list-group">
+                @foreach($post->comments as $comment)
+                    <li class="list-group-item">
+                        <h5>{{$comment->created_at}} by {{$comment->user->name}}</h5>
+                        <div>
+                            {{$comment->content}}
+                        </div>
+                    </li>
+                @endforeach
             </ul>
         </div>
 
