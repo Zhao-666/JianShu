@@ -43,3 +43,5 @@ Route::get('/posts/{post}/delete', 'PostController@delete');
 Route::post('/posts/image/upload','PostController@image_upload');
 //提交评论
 Route::post('/posts/{post}/comment','PostController@comment');
+Route::get('/posts/{post}/zan','PostController@zan');
+Route::get('/posts/{post}/unzan','PostController@unzan');
