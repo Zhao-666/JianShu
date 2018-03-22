@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Comment;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,14 +47,14 @@ class PostController extends Controller
 
     public function delete(Post $post)
     {
-        $this->authorize('delete',$post);
+        $this->authorize('delete', $post);
         $post->delete();
         return redirect('/posts');
     }
 
     public function edit(Post $post)
     {
-        return view('post/edit',compact('post'));
+        return view('post/edit', compact('post'));
     }
 
     public function update(Post $post)
@@ -63,7 +64,7 @@ class PostController extends Controller
             'content' => 'required|string|min:10'
         ]);
 
-        $this->authorize('update',$post);
+        $this->authorize('update', $post);
 
         $post->title = request('title');
         $post->content = request('content');
@@ -75,5 +76,18 @@ class PostController extends Controller
     {
         $path = request()->file('wangEditorH5File')->storePublicly(md5(time()));
         return asset('storage/' . $path);
+    }
+
+    public function comment(Post $post)
+    {
+        $this->validate(request(),[
+           'content'=>'required|min:3'
+        ]);
+        $comment = new Comment();
+        $comment->user_id = Auth::id();
+        $comment->content = request('content');
+        $post->comments()->save($comment);
+
+        return back();
     }
 }

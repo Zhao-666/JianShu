@@ -40,11 +40,11 @@
 
             <!-- List group -->
             <ul class="list-group">
-                <form action="/posts/comment" method="post">
+                <form action="/posts/{{$post->id}}/comment" method="post">
                     {{csrf_field()}}
-                    <input type="hidden" name="post_id" value="{{$post->id}}"/>
                     <li class="list-group-item">
                         <textarea name="content" class="form-control" rows="10"></textarea>
+                        @include('layout.error')
                         <button class="btn btn-default" type="submit">提交</button>
                     </li>
                 </form>
