@@ -19,7 +19,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->withCount(['comments','zans'])->paginate(6);
+        $posts = Post::orderBy('created_at', 'desc')->withCount(['comments', 'zans'])->paginate(6);
         return view('post/index', compact('posts'));
     }
 
@@ -107,5 +107,10 @@ class PostController extends Controller
     {
         $post->zan(Auth::id())->delete();
         return back();
+    }
+
+    public function search()
+    {
+        return view('/post/search');
     }
 }

@@ -32,6 +32,8 @@ Route::get('/posts', 'PostController@index');
 //创建文章
 Route::get('/posts/create', 'PostController@create');
 Route::post('/posts', 'PostController@store');
+
+Route::get('/posts/search','PostController@search');
 //文章详情页
 Route::get('/posts/{post}', 'PostController@show');
 //编辑文章
