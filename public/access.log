@@ -1705,3 +1705,7 @@
 ::1 - - [03/Apr/2018:23:49:53 +0800] "GET /posts/search?query=aa HTTP/1.1" 200 5332
 ::1 - - [03/Apr/2018:23:49:55 +0800] "GET /posts/search?query=ss HTTP/1.1" 200 5332
 ::1 - - [03/Apr/2018:23:49:56 +0800] "GET /posts/search?query=asd HTTP/1.1" 200 5682
+::1 - - [03/Apr/2018:23:52:00 +0800] "GET /posts/search?query=asd HTTP/1.1" 200 5696
+::1 - - [03/Apr/2018:23:52:01 +0800] "GET /favicon.ico HTTP/1.1" 200 -
+::1 - - [03/Apr/2018:23:52:02 +0800] "GET /posts/search?query=asd HTTP/1.1" 200 5696
+::1 - - [03/Apr/2018:23:52:03 +0800] "GET /favicon.ico HTTP/1.1" 200 -

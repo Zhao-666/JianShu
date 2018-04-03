@@ -15,5 +15,6 @@
                     {!!$post->content !!}
                 </div>
             @endforeach
+            {{$posts->links()}}
         </div><!-- /.blog-main -->
 @endsection
