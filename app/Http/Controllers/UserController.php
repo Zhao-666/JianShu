@@ -14,4 +14,19 @@ class UserController extends Controller
     {
 
     }
+
+    public function show()
+    {
+        return view('user.show');
+    }
+
+    public function fan()
+    {
+
+    }
+
+    public function unfan()
+    {
+
+    }
 }
