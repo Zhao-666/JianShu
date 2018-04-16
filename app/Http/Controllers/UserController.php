@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -32,13 +33,24 @@ class UserController extends Controller
         return view('user.show', compact('user', 'posts', 'suser', 'fuser'));
     }
 
-    public function fan()
+    public function fan(User $user)
     {
+        $me = Auth::user();
+        $me->doFan($user->id);
 
+        return [
+            'error' => 0,
+            'msg' => ''
+        ];
     }
 
-    public function unfan()
+    public function unfan(User $user)
     {
-
+        $me = Auth::user();
+        $me->doUnfan($user->id);
+        return [
+            'error' => 0,
+            'msg' => ''
+        ];
     }
 }
