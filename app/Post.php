@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Query\Builder;
 use Laravel\Scout\Searchable;
 
 class Post extends BaseModel
@@ -41,5 +42,22 @@ class Post extends BaseModel
     public function zans()
     {
         return $this->hasMany('App\Zan');
+    }
+
+    public function scopeAuthorBy(Builder $query, $user_id)
+    {
+        return $query->where('user_id', $user_id);
+    }
+
+    public function postTopics()
+    {
+        return $this->hasMany(PostTopic::class, 'post_id', 'id');
+    }
+
+    public function scopeTopicNotBy(Builder $query, $topic_id)
+    {
+        return $query->doesntHave('topic_id', 'and', function ($q) use ($topic_id) {
+            $q->where('topic_id',$topic_id);
+        });
     }
 }
